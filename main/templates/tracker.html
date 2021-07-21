@@ -2,8 +2,8 @@
 
 {% block title %}Tracker{% endblock %}
 {% block title2 %}tracker{% endblock title2 %}
-
 {% block content %}
+<h3>{{ws.date}}</h3>
 <table class="table table-striped table-hover table-bordered">
     <thead>
         <tr>
@@ -17,13 +17,16 @@
     <tbody>
         <tr>
             <th scope="row">1</th>
-            <td colspan="1">5:00am</td>
-            <td colspan="1">PROC</td>
-            <td colspan="1">116</td>
-            <td colspan="1">6:00am</td>
+            {% for entry in ws.entry_set.all %}
+            <td colspan="1">{{entry.start_time}}</td>
+            <td colspan="1">{{entry.operation}}</td>
+            <td colspan="1">{{entry.store}}</td>
+            <td colspan="1">{{entry.end_time}}</td>
+            {% endfor %}
         </tr>
     </tbody>
 </table>
+
 
 <div class="d-grid gap-2">
     <button class="btn btn-primary" type="submit" name="Start_Time" , value="Start_Time">Start_Time</button>

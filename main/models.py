@@ -29,7 +29,7 @@ class Worksheet(models.Model):
         verbose_name_plural = ("Worksheets")
 
     def __str__(self):
-        return self.user.name
+        return self.date
 
     def get_absolute_url(self):
         return reverse("Worksheet_detail", kwargs={"pk": self.pk})
@@ -48,7 +48,7 @@ class Entry(models.Model):
         verbose_name_plural = ("entries")
 
     def __str__(self):
-        return self.name
+        return self.operation
 
     def get_absolute_url(self):
         return reverse("entry_detail", kwargs={"pk": self.pk})
