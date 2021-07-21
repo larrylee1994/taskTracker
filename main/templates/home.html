@@ -2,3 +2,15 @@
 
 {% block title %}Home Page{% endblock %}
 {% block title2 %}home{% endblock title2 %}
+
+{% block content %}
+<form method="post" action="#", class="form-group">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button type="submit" , name="save" , class="btn btn-primary">Create New</button>
+        </div>
+        {{form}}
+      </div>
+</form>
+{% endblock content %}

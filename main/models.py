@@ -1,29 +1,54 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
 
-class Proccess(models.Model):
+class User(models.Model):
 
     name = models.CharField(max_length=30)
-    date = models.DateTimeField(auto_now_add=True)
-    # class Meta:
-    #     verbose_name = ("test")
-    #     verbose_name_plural = ("tests")
+
+    class Meta:
+        verbose_name = ("User")
+        verbose_name_plural = ("Users")
 
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse("test_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("User_detail", kwargs={"pk": self.pk})
 
 
-class Current_task(models.Model):
-    proc = models.ForeignKey(Proccess, on_delete=models.CASCADE)
-    start_time = models.DateTimeField(name="start time", auto_now_add=True)
-    end_time = models.DateTimeField(name="end time")
-    store = models.IntegerField(name="store_number")
-    mode = models.CharField(max_length=10)
+class Worksheet(models.Model):
+
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(name="date", auto_now_add=True)
+
+    class Meta:
+        verbose_name = ("Worksheet")
+        verbose_name_plural = ("Worksheets")
 
     def __str__(self):
-        return self.store
+        return self.user.name
+
+    def get_absolute_url(self):
+        return reverse("Worksheet_detail", kwargs={"pk": self.pk})
+
+
+class Entry(models.Model):
+
+    worksheet = models.ForeignKey(Worksheet, on_delete=models.CASCADE)
+    start_time = models.DateTimeField
+    operation = models.CharField(max_length=10)
+    store = models.SmallIntegerField(name="store_number", default=116)
+    end_time = models.DateTimeField
+
+    class Meta:
+        verbose_name = ("entry")
+        verbose_name_plural = ("entries")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("entry_detail", kwargs={"pk": self.pk})
