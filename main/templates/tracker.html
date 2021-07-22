@@ -15,24 +15,27 @@
         </tr>
     </thead>
     <tbody>
+        {% for entry in ws.entry_set.all %}
         <tr>
-            <th scope="row">1</th>
-            {% for entry in ws.entry_set.all %}
+            <th scope="row">{{forloop.counter}}</th>
             <td colspan="1">{{entry.start_time}}</td>
             <td colspan="1">{{entry.operation}}</td>
             <td colspan="1">{{entry.store}}</td>
             <td colspan="1">{{entry.end_time}}</td>
-            {% endfor %}
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 
+<form method="post" action="#", class="form-group">
+    {% csrf_token %}
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit" name="end_entry" , value="end_entry">end_entry</button>
+        <button class="btn btn-primary" type="submit" name="start_entry" , value="start_entry">start_entry</button>
+        <button class="btn btn-primary" type="submit" name="Store" , value="Store">Store</button>
+        <button class="btn btn-success" type="submit" name="Operation" , value="Operation">Operation</button>
+    </div>
+</form>
 
-<div class="d-grid gap-2">
-    <button class="btn btn-primary" type="submit" name="Start_Time" , value="Start_Time">Start_Time</button>
-    <button class="btn btn-primary" type="submit" name="End_Time" , value="End_Time">End_Time</button>
-    <button class="btn btn-primary" type="submit" name="Store" , value="Store">Store</button>
-    <button class="btn btn-success" type="submit" name="Operation" , value="Operation">Operation</button>
-</div>
 
 {% endblock content %}

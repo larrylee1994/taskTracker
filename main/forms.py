@@ -1,19 +1,14 @@
 from django import forms
+from django.utils import timezone
 
 
 class CreateNewEntry(forms.Form):
-    operation = forms.CharField(label="operation", max_length=200)
-    store = forms.IntegerField(max_value=999)
-    start_time = forms.DateTimeField(required=True, label="Presentation date", widget=forms.DateTimeInput) 
-    end_time = forms.DateTimeInput()
+    start_time = forms.DateTimeField(label="start_time")
+    operation = forms.CharField(max_length=10)
+    store = forms.IntegerField(label="store")
+    end_time = forms.DateTimeField(label="end_time")
+
 
 class CreateNewWorksheet(forms.Form):
     # name = forms.CharField(max_length=99)
     date = forms.CharField(max_length=99)
-    
-
-    
-
-    
-
-    

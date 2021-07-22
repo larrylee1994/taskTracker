@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 
@@ -38,10 +39,10 @@ class Worksheet(models.Model):
 class Entry(models.Model):
 
     worksheet = models.ForeignKey(Worksheet, on_delete=models.CASCADE)
-    start_time = models.DateTimeField
+    start_time = models.DateTimeField(name="start_time", auto_now_add=True)
     operation = models.CharField(max_length=10)
-    store = models.SmallIntegerField(name="store_number", default=116)
-    end_time = models.DateTimeField
+    store = models.IntegerField(name="store", default=116)
+    end_time = models.DateTimeField(name="end_time", default=timezone.now)
 
     class Meta:
         verbose_name = ("entry")
