@@ -10,5 +10,5 @@ class CreateNewEntry(forms.Form):
 
 
 class CreateNewWorksheet(forms.Form):
-    # name = forms.CharField(max_length=99)
-    date = forms.CharField(max_length=99)
+    name = forms.CharField(max_length=30)
+    # date = forms.CharField(max_length=99)

@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import Worksheet, Entry, User
+from .models import Worksheet, Entry
 from .forms import CreateNewWorksheet
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+
 
 def home(response):
 
@@ -10,53 +11,56 @@ def home(response):
         form = CreateNewWorksheet(response.POST)
 
         if form.is_valid():
-            d = form.cleaned_data["date"]
-            worksheet = Worksheet(
-                # name=form.cleaned_data["name"],
-                date=d,
-            )
+            worksheet = Worksheet(name=form.cleaned_data["name"])
             worksheet.save()
-            entry = worksheet.entry_set.create()
-            entry.store = 116
-            entry.operation = "PROC"
-            entry.save()
-            
 
-        return HttpResponseRedirect("tracker/%i" %worksheet.id)
+        return HttpResponseRedirect("tracker/%i" % worksheet.id)
     else:
         form = CreateNewWorksheet()
 
     return render(response, 'home.html', {"form": form})
 
+
 def register(response):
     return render(response, 'register.html')
+
 
 def sign_in(response):
     return render(response, 'sign_in.html')
 
+
 def dashboard(response):
-    return render(response, 'dashboard.html')
+    ws = Worksheet.objects.all()
+    
+    return render(response, 'dashboard.html', {"ws": ws})
+
 
 def user_tracker(response, id):
     ws = Worksheet.objects.get(id=id)
     last_entry = len(ws.entry_set.all())
-    print(last_entry)
     if response.method == "POST":
-        if response.POST.get("end_entry"):
-            entry = ws.entry_set.order_by('start_time')[last_entry - 1]
-            print(entry)
-            entry.end_time = timezone.now()
-            entry.save()
+        if response.POST.get("start_new"):
+            if (last_entry == 0):
+                entry = ws.entry_set.create()
+                entry.store = response.POST.get("btnradio")
+                entry.operation = response.POST.get("operation_radio")
+                entry.save()
+            else:
+                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                entry.end_time = timezone.now()
+                entry.save()
+                new_entry = ws.entry_set.create()
+                new_entry.operation = response.POST.get("operation_radio")
+                new_entry.store = response.POST.get("btnradio")
+                new_entry.save()
 
-        elif response.POST.get("start_entry"):
-            entry = ws.entry_set.create()
-            entry.store = 116
-            entry.operation = "PROC"
-            entry.save()
-            
-        elif response.POST.get("complete_worksheet"):
-            pass
+        elif response.POST.get("delete"):
+            #if delete on no entries, delete worksheet and return to home
+            if (last_entry == 0):
+                ws.delete()
+                return HttpResponseRedirect("/")
+            else:
+                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                entry.delete()
 
-        pass
     return render(response, 'tracker.html', {"ws": ws})
-
