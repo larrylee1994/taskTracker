@@ -31,7 +31,7 @@ def sign_in(response):
 
 def dashboard(response):
     ws = Worksheet.objects.all()
-    
+
     return render(response, 'dashboard.html', {"ws": ws})
 
 
@@ -57,8 +57,9 @@ def user_tracker(response, id):
         elif response.POST.get("delete"):
             #if delete on no entries, delete worksheet and return to home
             if (last_entry == 0):
-                ws.delete()
-                return HttpResponseRedirect("/")
+                # ws.delete()
+                # return HttpResponseRedirect("/")
+                pass
             else:
                 entry = ws.entry_set.order_by('start_time')[last_entry - 1]
                 entry.delete()
