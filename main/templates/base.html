@@ -57,6 +57,27 @@
                 <hr class="mt-0 mb-4">
                 {% block content %}
                 {% endblock content %}
+
+                {% comment %} add empty login block for registration pages {% endcomment %}
+                {% block login %}
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        <div class="card">
+                            <h5 class="card-header">
+                                Error
+                            </h5>
+                            <div class="card-body">
+                                <h4 class="card-title">Cannot access this page</h4>
+                                <p class="card-text">Login to gain access.</p>
+                                <a href="/login" class="btn btn-primary">Go to Login</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock login %}
+
+                
+
+
             </div>
         </div>
 

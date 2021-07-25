@@ -5,78 +5,75 @@
 {% block title2 %}tracker{% endblock title2 %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <h3>{{ws.name}}</h3>
-    <h2>{{ws.date}}</h2>
+    {% if user.is_authenticated %}
+        <h3>{{ws.name}}</h3>
+        <h2>{{ws.date}}</h2>
 
-    <h3>Start new task</h3>
-    <form method="post" action="#" , class="form-group">
-        {% csrf_token %}
+        <h3>Start new task</h3>
+        <form method="post" action="#" , class="form-group">
+            {% csrf_token %}
 
-        <div class="d-grid gap-3">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value=116>
-                <label class="btn btn-outline-primary" for="btnradio1">116</label>
+            <div class="d-grid gap-3">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value=116>
+                    <label class="btn btn-outline-primary" for="btnradio1">116</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value=215>
-                <label class="btn btn-outline-primary" for="btnradio2">215</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value=215>
+                    <label class="btn btn-outline-primary" for="btnradio2">215</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value=254>
-                <label class="btn btn-outline-primary" for="btnradio3">254</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value=254>
+                    <label class="btn btn-outline-primary" for="btnradio3">254</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" value=517>
-                <label class="btn btn-outline-primary" for="btnradio4">517</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" value=517>
+                    <label class="btn btn-outline-primary" for="btnradio4">517</label>
+                </div>
+                
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="operation_radio" id="btnradio_01" autocomplete="off" checked value=PROC>
+                    <label class="btn btn-outline-info" for="btnradio_01"> PROC</label>
+
+                    <input type="radio" class="btn-check" name="operation_radio" id="btnradio_02" autocomplete="off" value=PICK>
+                    <label class="btn btn-outline-info" for="btnradio_02">PICK</label>
+
+                    <input type="radio" class="btn-check" name="operation_radio" id="btnradio_03" autocomplete="off" value=DEL>
+                    <label class="btn btn-outline-info" for="btnradio_03">DEL</label>
+
+                    <input type="radio" class="btn-check" name="operation_radio" id="btnradio_04" autocomplete="off" value=BREAK>
+                    <label class="btn btn-outline-info" for="btnradio_04">BREAK</label>
+                </div>
+
+                <button class="btn btn-success" type="submit" name="start_new" , value="start_new">Start New</button>
+                <button class="btn btn-danger" type="submit" name="delete" , value="delete">Undo</button>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Start_Time</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Store</th>
+                            <th scope="col">End_Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in ws.entry_set.all %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td colspan="1">{{entry.start_time}}</td>
+                            <td colspan="1">{{entry.operation}}</td>
+                            <td colspan="1">{{entry.store}}</td>
+                            <td colspan="1">{{entry.end_time}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="operation_radio" id="btnradio_01" autocomplete="off" checked value=PROC>
-                <label class="btn btn-outline-info" for="btnradio_01"> PROC</label>
+        </form>
 
-                <input type="radio" class="btn-check" name="operation_radio" id="btnradio_02" autocomplete="off" value=PICK>
-                <label class="btn btn-outline-info" for="btnradio_02">PICK</label>
-
-                <input type="radio" class="btn-check" name="operation_radio" id="btnradio_03" autocomplete="off" value=DEL>
-                <label class="btn btn-outline-info" for="btnradio_03">DEL</label>
-
-                <input type="radio" class="btn-check" name="operation_radio" id="btnradio_04" autocomplete="off" value=BREAK>
-                <label class="btn btn-outline-info" for="btnradio_04">BREAK</label>
+        <form method="post" action="#" , class="form-group">
+            {% csrf_token %}
+            <div class="d-grid gap-3">
+                <button class="btn btn-info" type="submit" name="complete" , value="complete">complete</button>
             </div>
-
-            <button class="btn btn-success" type="submit" name="start_new" , value="start_new">Start New</button>
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Start_Time</th>
-                        <th scope="col">Task</th>
-                        <th scope="col">Store</th>
-                        <th scope="col">End_Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for entry in ws.entry_set.all %}
-                    <tr>
-                        <th scope="row">{{forloop.counter}}</th>
-                        <td colspan="1">{{entry.start_time}}</td>
-                        <td colspan="1">{{entry.operation}}</td>
-                        <td colspan="1">{{entry.store}}</td>
-                        <td colspan="1">{{entry.end_time}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </form>
-
-    <form method="post" action="#" , class="form-group">
-        {% csrf_token %}
-        <div class="d-grid gap-3">
-            <button class="btn btn-danger" type="submit" name="delete" , value="delete">delete</button>
-        </div>
-    </form>
-
-{% else %}
-    <p>Login<a href="/login">Here</a></p>
-{% endif %}
+        </form>
+    {% endif %}
 {% endblock content %}
-

@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
 {% block title %}Dashboard{% endblock %}
-{% block title2 %}dashboard{% endblock title2 %}
+{% block title2 %}Dashboard{% endblock title2 %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <p>Dashboard coming soon</p>
-{% else %}
-    <p>Login<a href="/login">Here</a></p>
-{% endif %}
+    {% if user.is_authenticated %}
+        <p>Dashboard coming soon</p>
+    {% endif %}
 {% endblock content %}

@@ -5,19 +5,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <form method="post" action="#", class="form-group">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            {{form | crispy}}
-            <div class="input-group">
-                <button type="submit" , name="save" , class="btn btn-primary">Create New</button>
+    {% if user.is_authenticated %}
+        <form method="post" action="#", class="form-group">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                {{form | crispy}}
+                <div class="input-group">
+                    <button type="submit" , name="save" , class="btn btn-primary">Create New</button>
+                </div>
             </div>
-        </div>
-    </form>
-    
-{% else %}
-        <p>Login<a href="/login">Here</a></p>
-{% endif %}
+        </form>
+    {% endif %}
 {% endblock content %}
     
