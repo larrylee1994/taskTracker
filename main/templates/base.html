@@ -25,21 +25,20 @@
             <!-- <a class="nav-link active" aria-current="page" href="/home">Home</a> -->
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/sign_in">Sign in</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="/dashboard">Dashboard</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="/tracker/11">Tracker</a>
-        </li> -->
-
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li> 
+        {% endif %}
     </ul>
     {% endblock nav %}
 
@@ -50,7 +49,6 @@
                 <hr class="mt-0 mb-4">
                 {% block content %}
                 {% endblock content %}
-
             </div>
         </div>
 

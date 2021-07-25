@@ -21,14 +21,6 @@ def home(response):
     return render(response, 'home.html', {"form": form})
 
 
-def register(response):
-    return render(response, 'register.html')
-
-
-def sign_in(response):
-    return render(response, 'sign_in.html')
-
-
 def dashboard(response):
     ws = Worksheet.objects.all()
 

@@ -2,3 +2,11 @@
 
 {% block title %}Dashboard{% endblock %}
 {% block title2 %}dashboard{% endblock title2 %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p>Dashboard coming soon</p>
+{% else %}
+    <p>Login<a href="/login">Here</a></p>
+{% endif %}
+{% endblock content %}
