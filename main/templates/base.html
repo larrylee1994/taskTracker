@@ -28,10 +28,18 @@
             <a class="nav-link" href="/dashboard">Dashboard</a>
         </li>
         {% if user.is_authenticated %}
+            <!-- only visable to logged in users -->
             <li class="nav-item">
-                <a class="nav-link" href="/logout">logout</a>
+                <a class="nav-link" href="/worksheets">Worksheets</a>
             </li>
-        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <li>
+                <a class="nav-link">{{user.first_name}}</a>
+            </li>
+            {% else %}
+            <!-- only visable to anonymous users -->
             <li class="nav-item">
                 <a class="nav-link" href="/register">Register</a>
             </li>

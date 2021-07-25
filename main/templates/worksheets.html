@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Worksheets{% endblock %}
+{% block title2 %}Worksheet List{% endblock title2 %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="list-group">
+            {% for ws in user.worksheet.all  %}
+                <a href="/tracker/{{ws.id}}" class="list-group-item list-group-item-action">
+                    {{ws.date}} - {{ws.name}}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Login<a href="/login">Here</a></p>
+    {% endif %}
+{% endblock content %}
