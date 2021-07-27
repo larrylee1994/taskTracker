@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'main',
     'register',
+    'export',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,10 @@ TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
-USE_L10N = True
+DATETIME_FORMAT = 'g:i:s a'
+TIME_FORMAT = 'g:i:s a'
+
+USE_L10N = False
 
 USE_TZ = False
 

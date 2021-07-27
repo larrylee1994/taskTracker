@@ -1,5 +1,4 @@
 from django import forms
-from django.utils import timezone
 
 
 class CreateNewEntry(forms.Form):
@@ -11,4 +10,3 @@ class CreateNewEntry(forms.Form):
 
 class CreateNewWorksheet(forms.Form):
     name = forms.CharField(max_length=30)
-    # date = forms.CharField(max_length=99)
