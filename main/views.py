@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from .models import Worksheet, Entry
-from .forms import CreateNewWorksheet
+from .models import Worksheet
 from django.utils import timezone
-from django.http import HttpResponseRedirect, FileResponse
+from django.http import HttpResponseRedirect
 from django.core import serializers
 
 
@@ -30,14 +29,6 @@ def dashboard(response):
 # TODO: abstract tracker function into its own view
 def user_tracker(response, id):
 
-    operation_list = [
-        "PROC",
-        "PICK",
-        "DEL",
-        "LOAD",
-        "BREAK",
-    ]
-
     # TODO: properly catch this specific expeption
     try:
         ws = Worksheet.objects.get(id=id)
@@ -63,7 +54,8 @@ def user_tracker(response, id):
                     entry.save()
                 else:
                     # Update lastest end time to now
-                    entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                    # entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                    entry = ws.entry_set.order_by('id')[last_entry - 1]
                     entry.end_time = timezone.now()
                     entry.save()
 
@@ -77,17 +69,15 @@ def user_tracker(response, id):
             elif response.POST.get("delete"):
 
                 if (last_entry > 0):
-                    entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                    entry = ws.entry_set.order_by('id')[last_entry - 1]
                     entry.delete()
 
             elif response.POST.get("complete"):
                 # Update lastest end time to now
-                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                entry = ws.entry_set.order_by('id')[last_entry - 1]
                 if (entry.end_time == None):
                     entry.end_time = timezone.now()
                     entry.save()
-
-        data = zip(ws, operation_list)
 
         return render(response, 'tracker.html', {"ws": ws})
     return render(response, "worksheets.html", {"ws": ws})

@@ -15,6 +15,25 @@ class Worksheet(models.Model):
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
 
+    # TODO: implement operation.value, and operation.desciption
+    operations = [
+        "R_PICK",
+        "B_PICK",
+        "PROC",
+        "SCAN",
+        "DEL",
+        "LOAD",
+        "BREAK",
+    ]
+    stores = [
+        116,
+        167,
+        215,
+        254,
+        279,
+        517,
+    ]
+
     class Meta:
         verbose_name = ("Worksheet")
         verbose_name_plural = ("Worksheets")
@@ -24,13 +43,6 @@ class Worksheet(models.Model):
 
     def get_absolute_url(self):
         return reverse("Worksheet_detail", kwargs={"pk": self.pk})
-
-
-def default_end_time():
-    now = datetime.now()
-    start = now.replace(hour=18, minute=0, second=0, microsecond=0)
-    return start if start > now else start + timedelta(seconds=600)
-
 
 class Entry(models.Model):
 

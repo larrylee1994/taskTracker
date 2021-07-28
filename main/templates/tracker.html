@@ -17,38 +17,27 @@
         <div class="d-grid gap-3">
 
             <div class="btn-group-lg gap-3 me-1" role="toolbar" aria-label="Toolbar with button groups">
-                <!-- stores list -->
-                <div class="btn-group btn-group-lg me-2" role="group" aria-label="Basic radio toggle button group">
-
-                    <input type="radio" class="btn-check" name="store_list" id="btnradio1" autocomplete="off" checked
-                        value=116>
-                    <label class="btn btn-outline-primary" for="btnradio1">116</label>
-
-                    <input type="radio" class="btn-check" name="store_list" id="btnradio5" autocomplete="off" value=517>
-                    <label class="btn btn-outline-primary" for="btnradio5">167</label>
-
-                    <input type="radio" class="btn-check" name="store_list" id="btnradio2" autocomplete="off" value=215>
-                    <label class="btn btn-outline-primary" for="btnradio2">215</label>
-
-                    <input type="radio" class="btn-check" name="store_list" id="btnradio3" autocomplete="off" value=254>
-                    <label class="btn btn-outline-primary" for="btnradio3">254</label>
-
-                    <input type="radio" class="btn-check" name="store_list" id="btnradio4" autocomplete="off" value=517>
-                    <label class="btn btn-outline-primary" for="btnradio4">517</label>
+                <div class="btn-group me-1" role="group" aria-label="Basic radio toggle button group">
+                    <!-- stores list -->
+                    {% for item in ws.stores %}
+                    <input type="radio" class="btn-check" name="store_list" id="btnradio{{forloop.counter}}"
+                        autocomplete="off" checked value={{item}}>
+                    <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item}}</label>
+                    {% endfor %}
                 </div>
             </div>
 
-            <!-- operation list -->
             <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon">Select Operation</div>
-                <input class="form-control" list="datalistOptions2" id="exampleDataList2" name="operation_list"
-                    placeholder="Type to search..." aria-describedby="btnGroupAddon" required>
-                <datalist id="datalistOptions2">
-                    <option value="PROC">
-                    <option value="PICK">
-                    <option value="DEL">
-                    <option value="BREAK">
-                </datalist>
+
+                <select class="form-select form-control-lg" name="operation_list" aria-describedby="btnGroupAddon"
+                    required>
+                    <option disabled>Select Operation</option>
+                    <!-- operation list -->
+                    {% for item in ws.operations %}
+                    <option value={{item}}>{{item}}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <!-- Start New Button -->
@@ -116,7 +105,7 @@
     <form method="post" action="#" , class="form-group">
         {% csrf_token %}
         <div class="d-grid gap-3">
-            <button class="btn btn-info" type="submit" name="complete" , value="complete">complete</button>
+            <button class="btn btn-info" type="submit" name="complete" , value="complete">Complete</button>
         </div>
     </form>
     <a href="/export">Export to Excel !</a>

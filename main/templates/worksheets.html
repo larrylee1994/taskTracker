@@ -6,9 +6,9 @@
 {% block content %}
     {% if user.is_authenticated %}
         <div class="list-group">
-            {% for ws in user.worksheet.all  %}
+            {% for ws in user.worksheet.all reversed %}
                 <a href="/tracker/{{ws.id}}" class="list-group-item list-group-item-action">
-                    {{ws.date}} - {{ws.name}}
+                    {{ws.date}} - {{ws.name}} - {{ws.id}}
                 </a>
             {% endfor %}
         </div>
