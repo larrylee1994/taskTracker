@@ -37,8 +37,6 @@ def excelreport(request):
     entries = []
 
     # Format Worksheet toString into list of lists
-
-    # TODO: format each item to remove any spaces
     
     for element in ws.entry_set.all():
         string = str(element)

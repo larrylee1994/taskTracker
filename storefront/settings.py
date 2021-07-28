@@ -138,4 +138,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = "/"
 
+# TODO: create logout page
 LOGOUT_REDIRECT_URL = "/login"

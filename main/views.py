@@ -30,17 +30,25 @@ def dashboard(response):
 # TODO: abstract tracker function into its own view
 def user_tracker(response, id):
 
+    operation_list = [
+        "PROC",
+        "PICK",
+        "DEL",
+        "LOAD",
+        "BREAK",
+    ]
+
     # TODO: properly catch this specific expeption
     try:
         ws = Worksheet.objects.get(id=id)
     except:
-        form = CreateNewWorksheet()
-        return render(response, 'home.html', {"form": form})
+        return HttpResponseRedirect('/')
     
     # Creates a callable session for export to excel view
     serialized_obj = serializers.serialize('json', [ ws, ])
     response.session['ws'] = serialized_obj
 
+    # Only continue if worksheet belongs to user
     if ws in response.user.worksheet.all():
 
         last_entry = len(ws.entry_set.all())
@@ -67,14 +75,19 @@ def user_tracker(response, id):
                     new_entry.save()
 
             elif response.POST.get("delete"):
-                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
-                entry.delete()
+
+                if (last_entry > 0):
+                    entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                    entry.delete()
 
             elif response.POST.get("complete"):
                 # Update lastest end time to now
                 entry = ws.entry_set.order_by('start_time')[last_entry - 1]
-                entry.end_time = timezone.now()
-                entry.save()
+                if (entry.end_time == None):
+                    entry.end_time = timezone.now()
+                    entry.save()
+
+        data = zip(ws, operation_list)
 
         return render(response, 'tracker.html', {"ws": ws})
     return render(response, "worksheets.html", {"ws": ws})
