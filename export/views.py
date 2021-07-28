@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from django.http import FileResponse
-import io
-import xlsxwriter
 from main.models import Worksheet
+import xlsxwriter
 import json
+import io
 
 # Create your views here.
 
@@ -15,9 +14,11 @@ def excelreport(request):
     worksheet = workbook.add_worksheet()
 
     categories = [
-        'Start Time',
-        'Task',
+        'Name',
+        'Day',
         'Store',
+        'Operation',
+        'Start Time',
         'End Time',
     ]
 
@@ -26,9 +27,8 @@ def excelreport(request):
 
     # Convert string to list of dict object
     ws1 = json.loads(ws)
-    print(ws1)
 
-    # Get object id
+    # Get object id, name, date
     ws_id = ws1[0]['pk']
     ws_name = ws1[0]['fields']['name']
     ws_date = ws1[0]['fields']['date']
@@ -37,9 +37,12 @@ def excelreport(request):
     entries = []
 
     # Format Worksheet toString into list of lists
+
+    # TODO: format each item to remove any spaces
+    
     for element in ws.entry_set.all():
         string = str(element)
-        result = list(string.split(" "))
+        result = list(string.split("-"))
         entries.append(result)
 
     # Start from the first column, Write titles
@@ -54,13 +57,14 @@ def excelreport(request):
     col = 0
 
     # Iterate over the data and write it out row by row.
-    for start, task, store, end in (entries):
-        worksheet.write(row, col,     start)
-        worksheet.write(row, col + 1, task)
+    for name, day, store, task, start, end in (entries):
+        worksheet.write(row, col,     name)
+        worksheet.write(row, col + 1, day)
         worksheet.write(row, col + 2, store)
-        worksheet.write(row, col + 3, end)
+        worksheet.write(row, col + 3, task)
+        worksheet.write(row, col + 4, start)
+        worksheet.write(row, col + 5, end)
         row += 1
-
 
     workbook.close()
     buffer.seek(0)

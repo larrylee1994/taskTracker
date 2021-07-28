@@ -10,19 +10,16 @@ from django.core import serializers
 def home(response):
 
     if response.method == "POST":
-        form = CreateNewWorksheet(response.POST)
-
-        if form.is_valid():
-            n = form.cleaned_data["name"]
-            worksheet = Worksheet(name=n)
-            worksheet.save()
-            response.user.worksheet.add(worksheet)
+        first_name = response.user.first_name
+        worksheet = Worksheet(name=first_name)
+        worksheet.save()
+        response.user.worksheet.add(worksheet)
 
         return HttpResponseRedirect("tracker/%i" % worksheet.id)
     else:
-        form = CreateNewWorksheet()
+        pass
 
-    return render(response, 'home.html', {"form": form})
+    return render(response, 'home.html')
 
 
 def dashboard(response):
@@ -30,15 +27,17 @@ def dashboard(response):
 
     return render(response, 'dashboard.html', {"ws": ws})
 
-
+# TODO: abstract tracker function into its own view
 def user_tracker(response, id):
 
+    # TODO: properly catch this specific expeption
     try:
         ws = Worksheet.objects.get(id=id)
     except:
         form = CreateNewWorksheet()
         return render(response, 'home.html', {"form": form})
     
+    # Creates a callable session for export to excel view
     serialized_obj = serializers.serialize('json', [ ws, ])
     response.session['ws'] = serialized_obj
 
@@ -48,28 +47,35 @@ def user_tracker(response, id):
         if response.method == "POST":
             if response.POST.get("start_new"):
                 if (last_entry == 0):
+                    # Create first entry
                     entry = ws.entry_set.create()
+                    entry.start_time = timezone.now()
                     entry.store = response.POST.get("store_list")
                     entry.operation = response.POST.get("operation_list")
                     entry.save()
                 else:
+                    # Update lastest end time to now
                     entry = ws.entry_set.order_by('start_time')[last_entry - 1]
                     entry.end_time = timezone.now()
                     entry.save()
+
+                    # Create next entry
                     new_entry = ws.entry_set.create()
-                    new_entry.operation = response.POST.get("operation_list")
+                    new_entry.start_time = timezone.now()
                     new_entry.store = response.POST.get("store_list")
+                    new_entry.operation = response.POST.get("operation_list")
                     new_entry.save()
 
             elif response.POST.get("delete"):
-                # if delete on no entries, delete worksheet and return to home
-                if (last_entry == 0):
-                    # ws.delete()
-                    # return HttpResponseRedirect("/")
-                    pass
-                else:
-                    entry = ws.entry_set.order_by('start_time')[last_entry - 1]
-                    entry.delete()
+                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                entry.delete()
+
+            elif response.POST.get("complete"):
+                # Update lastest end time to now
+                entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                entry.end_time = timezone.now()
+                entry.save()
+
         return render(response, 'tracker.html', {"ws": ws})
     return render(response, "worksheets.html", {"ws": ws})
 

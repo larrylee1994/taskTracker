@@ -2,14 +2,14 @@
 
 {% block title %}Home Page{% endblock %}
 {% block title2 %}Start new Worksheet{% endblock title2 %}
-{% load crispy_forms_tags %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
 {% block content %}
     {% if user.is_authenticated %}
         <form method="post" action="#", class="form-group">
             {% csrf_token %}
             <div class="input-group mb-3">
-                {{form | crispy}}
+                {% comment %} {{form | crispy}} {% endcomment %}
                 <div class="input-group">
                     <button type="submit" , name="save" , class="btn btn-primary">Create New</button>
                 </div>

@@ -12,7 +12,8 @@ def register(response):
         if form.is_valid():
             print(form)
             form.save()
-            return redirect("/")
+            # TODO: create successful register page
+            return redirect("/login")
     else:
         form = RegisterForm()
     return render(response, "register/register.html", {"form":form})
