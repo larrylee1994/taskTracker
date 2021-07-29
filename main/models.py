@@ -17,13 +17,18 @@ class Worksheet(models.Model):
 
     # TODO: implement operation.value, and operation.desciption
     operations = [
-        "R_PICK",
-        "B_PICK",
+        "REC",
+        "BACK",
         "PROC",
         "SCAN",
+        "R_PICK",
+        "B_PICK",
+        "S_PICK",
         "DEL",
         "LOAD",
-        "BREAK",
+        "Break",
+        "Lunch",
+        "Cleaning",
     ]
     stores = [
         116,

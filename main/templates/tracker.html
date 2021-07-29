@@ -21,7 +21,7 @@
                     <!-- stores list -->
                     {% for item in ws.stores %}
                     <input type="radio" class="btn-check" name="store_list" id="btnradio{{forloop.counter}}"
-                        autocomplete="off" checked value={{item}}>
+                        autocomplete="off" required value={{item}}>
                     <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item}}</label>
                     {% endfor %}
                 </div>
@@ -53,10 +53,10 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Start_Time</th>
+                <th scope="col">Start Time</th>
                 <th scope="col">Task</th>
                 <th scope="col">Store</th>
-                <th scope="col">End_Time</th>
+                <th scope="col">End Time</th>
             </tr>
         </thead>
         <tbody>

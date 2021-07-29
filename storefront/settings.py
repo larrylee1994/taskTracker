@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for storefront project.
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'main',
     'register',
     'export',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +129,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
