@@ -17,12 +17,12 @@
         <div class="d-grid gap-3">
 
             <div class="btn-group-lg gap-3 me-1" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group me-1" role="group" aria-label="Basic radio toggle button group">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <!-- stores list -->
                     {% for item in ws.stores %}
                     <input type="radio" class="btn-check" name="store_list" id="btnradio{{forloop.counter}}"
-                        autocomplete="off" required value={{item}}>
-                    <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item}}</label>
+                        autocomplete="off" required value={{item.number}}>
+                    <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item.number}}</label>
                     {% endfor %}
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <option disabled>Select Operation</option>
                     <!-- operation list -->
                     {% for item in ws.operations %}
-                    <option value={{item}}>{{item}}</option>
+                    <option value={{item.name}}>{{item.desc}}</option>
                     {% endfor %}
                 </select>
             </div>

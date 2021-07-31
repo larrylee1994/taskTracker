@@ -17,28 +17,28 @@ class Worksheet(models.Model):
     date = models.DateField(name="date", auto_now_add=True)
 
     # TODO: implement operation.value, and operation.desciption
+    
     operations = [
-        "REC",
-        "BACK",
-        "PROC",
-        "SCAN",
-        "R_PICK",
-        "B_PICK",
-        "S_PICK",
-        "DEL",
-        "LOAD",
-        "Break",
-        "Lunch",
-        "Cleaning",
+        {"name": 'REC',      "desc": "Receiving"},
+        {"name": 'BACK',     "desc": "Back Stocking"},
+        {"name": 'PROC',     "desc": "Proccessing"},
+        {"name": 'R_PICK',   "desc": "R Picking"},
+        {"name": 'B_PICK',   "desc": "B Picking"},
+        {"name": 'S_PICK',   "desc": "S Picking"},
+        {"name": 'DEL',      "desc": "Delivery"},
+        {"name": 'LOAD',     "desc": "Loading"},
+        {"name": 'Break',    "desc": "Break"},
+        {"name": 'Lunch',    "desc": "Lunch"},
+        {"name": 'Cleaning', "desc": "Cleaning"},
     ]
 
     stores = [
-        116,
-        167,
-        215,
-        254,
-        279,
-        517,
+        {"name": 'Orlando', "number": 116},
+        {"name": 'LBV', "number": 167},
+        {"name": 'Vineland', "number": 215},
+        {"name": 'Footwear', "number": 254},
+        {"name": 'Youth', "number": 279},
+        {"name": 'Disney', "number": 517},
     ]
 
     class Meta:
@@ -51,6 +51,7 @@ class Worksheet(models.Model):
     def get_absolute_url(self):
         # return reverse("Worksheet_detail", kwargs={"pk": self.pk})
         return "tracker/%i" % self.pk
+
 
 class Entry(models.Model):
 
@@ -75,7 +76,8 @@ class Entry(models.Model):
             end = self.end_time.strftime('%I:%M:%S %p')
 
         return name + "-" + day + "-" + str(self.store) + "-" + self.operation + "-" + start + "-" + end
-    
+
+    # TODO get absolute url work dynamically, currently only works on host machine
     def get_absolute_url(self):
         # return reverse("entry_detail", kwargs={"pk": self.pk})
         return "tracker/%i" % self.worksheet.pk

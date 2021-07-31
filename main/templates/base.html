@@ -55,6 +55,12 @@
         <li>
             <a class="nav-link">{{user.first_name}} {{user.last_name}}</a>
         </li>
+            {% if user.is_superuser %}
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin</a>
+            </li>
+            {% endif %}
+
         {% else %}
         <!-- only visable to anonymous users -->
         <li class="nav-item">

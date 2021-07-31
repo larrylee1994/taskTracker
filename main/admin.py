@@ -8,13 +8,22 @@ from import_export.admin import ImportExportActionModelAdmin
 
 class EntryResource(resources.ModelResource):
 
-    name = Field(
-        attribute='worksheet__user__first_name', 
-        column_name='Name')
+    name = Field(attribute='worksheet__user__first_name', column_name='NAME')
+    store = Field(attribute='store', column_name='STORE')
+    operation = Field(attribute='operation', column_name='OPERATION')
+    # start_time = Field(attribute='start_time', column_name='START TIME')
     date = Field(
-        column_name='Day',
+        column_name='DAY',
         attribute='worksheet__date',
         widget=TimeWidget(format='%A'))
+    start_time = Field(
+        column_name='START TIME',
+        attribute='start_time',
+        widget=TimeWidget(format='%I:%M:%S %p'))
+    end_time = Field(
+        column_name='END TIME',
+        attribute='end_time',
+        widget=TimeWidget(format='%I:%M:%S %p'))
     class Meta:
         model = Entry
         skip_unchanged = True
@@ -23,7 +32,7 @@ class EntryResource(resources.ModelResource):
                   'operation', 'start_time', 'end_time')
         export_order = fields
         widgets = {
-                'start_time': {'format': '%I:%M:%S %p'},
+                # 'start_time': {'format': '%I:%M:%S %p'},
                 'end_time': {'format': '%I:%M:%S %p'},
                 }
 
