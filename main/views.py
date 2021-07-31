@@ -38,9 +38,16 @@ def user_tracker(response, id):
     # Creates a callable session for export to excel view
     serialized_obj = serializers.serialize('json', [ ws, ])
     response.session['ws'] = serialized_obj
+    view_flag = False
 
     # Only continue if worksheet belongs to user
     if ws in response.user.worksheet.all():
+        view_flag = True
+    
+    if response.user.is_superuser:
+        view_flag = True
+    
+    if (view_flag):
 
         last_entry = len(ws.entry_set.all())
         if response.method == "POST":
@@ -54,9 +61,10 @@ def user_tracker(response, id):
                     entry.save()
                 else:
                     # Update lastest end time to now
-                    # entry = ws.entry_set.order_by('start_time')[last_entry - 1]
+                    # DEMO
                     entry = ws.entry_set.order_by('id')[last_entry - 1]
-                    entry.end_time = timezone.now()
+                    if (entry.end_time == None):
+                        entry.end_time = timezone.now()
                     entry.save()
 
                     # Create next entry

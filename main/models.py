@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from datetime import datetime, timedelta
 from time import strftime
 
@@ -30,6 +31,7 @@ class Worksheet(models.Model):
         "Lunch",
         "Cleaning",
     ]
+
     stores = [
         116,
         167,
@@ -47,7 +49,8 @@ class Worksheet(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("Worksheet_detail", kwargs={"pk": self.pk})
+        # return reverse("Worksheet_detail", kwargs={"pk": self.pk})
+        return "tracker/%i" % self.pk
 
 class Entry(models.Model):
 
@@ -72,6 +75,7 @@ class Entry(models.Model):
             end = self.end_time.strftime('%I:%M:%S %p')
 
         return name + "-" + day + "-" + str(self.store) + "-" + self.operation + "-" + start + "-" + end
-    # TODO: make reverse url work on entry
+    
     def get_absolute_url(self):
-        return reverse("entry_detail", kwargs={"pk": self.pk})
+        # return reverse("entry_detail", kwargs={"pk": self.pk})
+        return "tracker/%i" % self.worksheet.pk
