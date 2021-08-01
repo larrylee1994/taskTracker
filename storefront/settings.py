@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'main',
+    'tracker',
     'register',
     'export',
     'import_export',
@@ -146,5 +147,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = "/"
 
-# TODO: create logout page
+# TODO: create page: logout
 LOGOUT_REDIRECT_URL = "/login"
