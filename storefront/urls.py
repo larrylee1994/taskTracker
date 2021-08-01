@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from register import views as rv
 from export import views as ev
+from tracker import views as tv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', rv.register, name="register"),
     path('export/', ev.excelreport, name="export"),
+    path('tracker/<int:id>', tv.tracker, name="tracker"),
     path('', include('main.urls')),
     path('', include("django.contrib.auth.urls")),
 ]
