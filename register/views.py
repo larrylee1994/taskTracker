@@ -12,7 +12,7 @@ def register(response):
         if form.is_valid():
             print(form)
             form.save()
-            # TODO: create successful register page
+            # TODO: create page: successful register
             return redirect("/login")
     else:
         form = RegisterForm()
