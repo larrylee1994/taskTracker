@@ -28,7 +28,5 @@ def dashboard(response):
     # {"ws": ws}
     )
 
-# TODO: global variables or object for variables
-
 def worksheets(response):
     return render(response, "worksheets.html", {})

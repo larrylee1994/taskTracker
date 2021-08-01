@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from datetime import datetime, timedelta
 from time import strftime
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 
@@ -16,20 +17,6 @@ class Worksheet(models.Model):
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
 
-    operations = [
-        {"name": 'REC',      "desc": "Receiving"},
-        {"name": 'BACK',     "desc": "Back Stocking"},
-        {"name": 'PROC',     "desc": "Proccessing"},
-        {"name": 'R_PICK',   "desc": "R Picking"},
-        {"name": 'B_PICK',   "desc": "B Picking"},
-        {"name": 'S_PICK',   "desc": "S Picking"},
-        {"name": 'DEL',      "desc": "Delivery"},
-        {"name": 'LOAD',     "desc": "Loading"},
-        {"name": 'Break',    "desc": "Break"},
-        {"name": 'Lunch',    "desc": "Lunch"},
-        {"name": 'Cleaning', "desc": "Cleaning"},
-    ]
-
     stores = [
         {"name": 'Orlando',  "number": 116},
         {"name": 'LBV',      "number": 167},
@@ -40,15 +27,25 @@ class Worksheet(models.Model):
     ]
 
     class Meta:
-        verbose_name = ("Worksheet")
-        verbose_name_plural = ("Worksheets")
+        verbose_name = _("Worksheet")
+        verbose_name_plural = _("Worksheets")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        # return reverse("Worksheet_detail", kwargs={"pk": self.pk})
-        return "tracker/%i" % self.pk
+        return reverse("tracker", kwargs={"id": self.pk})
+        # return "tracker/%i" % self.pk
+    
+    def get_operations(self):
+        op = Operation.objects.all()
+        list = []
+        for item in op:
+            list.append({"name":item.name, "desc":item.description})
+        return list
+
+    # DEMO user defined operations
+    operations = get_operations
 
 
 class Entry(models.Model):
@@ -60,8 +57,8 @@ class Entry(models.Model):
     end_time = models.TimeField(name="end_time", null=True, blank=True)
 
     class Meta:
-        verbose_name = ("entry")
-        verbose_name_plural = ("entries")
+        verbose_name = _("entry")
+        verbose_name_plural = _("entries")
 
     def __str__(self):
 
@@ -74,7 +71,17 @@ class Entry(models.Model):
 
         return day + "-" + str(self.store) + "-" + self.operation + "-" + start + "-" + end
 
-    # TODO get absolute url work dynamically, currently only works on host machine
     def get_absolute_url(self):
-        # return reverse("entry_detail", kwargs={"pk": self.pk})
-        return "tracker/%i" % self.worksheet.pk
+        return reverse("tracker", kwargs={"id": self.worksheet.pk})
+
+class Operation(models.Model):
+
+    name = models.CharField(name="name", max_length=30)
+    description = models.CharField(name="description", max_length=30)
+
+    class Meta:
+        verbose_name = _("Operation")
+        verbose_name_plural = _("Operations")
+
+    def __str__(self):
+        return self.name

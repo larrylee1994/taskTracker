@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Worksheet, Entry
+from main.models import Worksheet, Entry, Operation
 from import_export import resources
 from import_export.widgets import TimeWidget
 from import_export.fields import Field
@@ -18,10 +18,11 @@ class EntryResource(resources.ModelResource):
         column_name='DAY',
         attribute='worksheet__date',
         widget=TimeWidget(format='%A'))
+    # DEMO leading 0 in front of hour
     start_time = Field(
         column_name='START TIME',
         attribute='start_time',
-        widget=TimeWidget(format='%I:%M:%S %p'))
+        widget=TimeWidget(format='%-I:%M:%S %p'))
     end_time = Field(
         column_name='END TIME',
         attribute='end_time',
@@ -62,25 +63,8 @@ class EntryAdmin(ImportExportActionModelAdmin):
     get_name.short_description = 'Name'
     get_date.admin_order_field = 'worksheet__id'
     get_date.short_description = 'Date'
+class WorksheetAdmin(admin.ModelAdmin):
 
-
-class WorksheetResource(resources.ModelResource):
-
-    full_name = Field()
-
-    class Meta:
-        model = Worksheet
-        skip_unchanged = True
-        report_skipped = False
-        fields = ('full_name', 'date')
-
-    def dehydrate_full_name(self, worksheet):
-        return '%s %s' % (worksheet.user.first_name, worksheet.user.last_name)
-
-
-class WorksheetAdmin(ImportExportActionModelAdmin):
-
-    resource_class = WorksheetResource
     list_display = ('get_name', 'get_date')
     list_filter = (
         ('date', DateFieldListFilter),
@@ -99,7 +83,12 @@ class WorksheetAdmin(ImportExportActionModelAdmin):
     get_date.admin_order_field = 'id'
     get_date.short_description = 'Date'
 
+class OperationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+
+
 
 admin.site.register(Worksheet, WorksheetAdmin)
 admin.site.register(Entry, EntryAdmin)
+admin.site.register(Operation, OperationAdmin)
 admin.site.site_header = 'My administration'

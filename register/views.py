@@ -13,7 +13,7 @@ def register(response):
             print(form)
             form.save()
             # TODO: create page: successful register
-            return redirect("/login")
+            return redirect("/login/")
     else:
         form = RegisterForm()
     return render(response, "register/register.html", {"form":form})

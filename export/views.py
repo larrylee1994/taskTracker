@@ -2,6 +2,7 @@ from django.http import FileResponse
 from main.models import Worksheet
 import xlsxwriter
 import io
+from storefront.settings import DELIMITER as D
 
 # Create your views here.
 
@@ -25,7 +26,7 @@ def excelreport(request):
 
     for element in ws.entry_set.all():
         string = str(element)
-        result = list(string.split("-"))
+        result = list(string.split(D))
         entries.append(result)
 
     titles = [

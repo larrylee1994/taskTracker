@@ -35,7 +35,7 @@
                     <option disabled>Select Operation</option>
                     <!-- operation list -->
                     {% for item in ws.operations %}
-                    <option value={{item.name}}>{{item.desc}}</option>
+                    <option value={{item.name}}>{{item.name}} - {{item.desc}}</option>
                     {% endfor %}
                 </select>
             </div>
