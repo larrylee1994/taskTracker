@@ -3,8 +3,11 @@ from main.models import Worksheet, Entry
 from import_export import resources
 from import_export.widgets import TimeWidget
 from import_export.fields import Field
-from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ImportExportActionModelAdmin
+from django.contrib.admin import DateFieldListFilter, ListFilter
+from django.contrib.admin import AdminSite
+from django.utils.translation import ugettext_lazy
+
 
 class EntryResource(resources.ModelResource):
 
@@ -23,11 +26,7 @@ class EntryResource(resources.ModelResource):
         column_name='END TIME',
         attribute='end_time',
         widget=TimeWidget(format='%I:%M:%S %p'))
-    
-    # full_name = Field()
 
-    # def dehydrate_full_name(self, worksheet):
-    #     return '%s %s' % (worksheet.user.first_name, worksheet.user.last_name)
     class Meta:
         model = Entry
         skip_unchanged = True
@@ -35,27 +34,31 @@ class EntryResource(resources.ModelResource):
         fields = ('name', 'date', 'store',
                   'operation', 'start_time', 'end_time')
         export_order = fields
-        widgets = {
-                # 'start_time': {'format': '%I:%M:%S %p'},
-                'end_time': {'format': '%I:%M:%S %p'},
-                }
 
-    
+
 class EntryAdmin(ImportExportActionModelAdmin):
     resource_class = EntryResource
     view_on_site = True
     list_display = ('get_name', 'get_date', 'store',
                     'operation', 'start_time', 'end_time')
 
+    list_filter = (
+        ('worksheet__date', DateFieldListFilter),
+    )
+
     def get_name(self, obj):
         first_name = obj.worksheet.user.first_name
         last_name = obj.worksheet.user.last_name
-        return (f"{first_name} {last_name}")
+        return (f"{last_name}, {first_name}")
 
     def get_date(self, obj):
         return obj.worksheet.date
 
-    get_name.admin_order_field = 'worksheet__user__first_name'
+    def get_day(self, obj):
+
+        return obj.worksheet.date
+
+    get_name.admin_order_field = 'worksheet__user__last_name'
     get_name.short_description = 'Name'
     get_date.admin_order_field = 'worksheet__id'
     get_date.short_description = 'Date'
@@ -64,6 +67,7 @@ class EntryAdmin(ImportExportActionModelAdmin):
 class WorksheetResource(resources.ModelResource):
 
     full_name = Field()
+
     class Meta:
         model = Worksheet
         skip_unchanged = True
@@ -76,11 +80,26 @@ class WorksheetResource(resources.ModelResource):
 
 class WorksheetAdmin(ImportExportActionModelAdmin):
 
-    # TODO add row sorting by First Last Name, and a row sorting by creation ws.id
-
     resource_class = WorksheetResource
-    list_display = ('name', 'date')
+    list_display = ('get_name', 'get_date')
+    list_filter = (
+        ('date', DateFieldListFilter),
+    )
+
+    def get_name(self, obj):
+        first_name = obj.user.first_name
+        last_name = obj.user.last_name
+        return (f"{last_name}, {first_name}")
+
+    def get_date(self, obj):
+        return obj.date
+
+    get_name.admin_order_field = 'user__last_name'
+    get_name.short_description = 'Name'
+    get_date.admin_order_field = 'id'
+    get_date.short_description = 'Date'
 
 
 admin.site.register(Worksheet, WorksheetAdmin)
 admin.site.register(Entry, EntryAdmin)
+admin.site.site_header = 'My administration'
