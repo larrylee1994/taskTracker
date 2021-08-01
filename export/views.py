@@ -1,7 +1,6 @@
 from django.http import FileResponse
 from main.models import Worksheet
 import xlsxwriter
-import json
 import io
 
 # Create your views here.
@@ -13,7 +12,23 @@ def excelreport(request):
     workbook = xlsxwriter.Workbook(buffer)
     worksheet = workbook.add_worksheet()
 
-    categories = [
+    # Get current ws id from session
+
+    ws_id = request.session.get('ws', None)
+    ws = Worksheet.objects.get(id=ws_id)
+    ws_name = ws.user.first_name
+    ws_date = ws.date
+
+    entries = []
+
+    # Format Worksheet toString into list of lists
+
+    for element in ws.entry_set.all():
+        string = str(element)
+        result = list(string.split("-"))
+        entries.append(result)
+
+    titles = [
         'Name',
         'Day',
         'Store',
@@ -22,32 +37,12 @@ def excelreport(request):
         'End Time',
     ]
 
-    # Get string representation of list of dict
-    ws = request.session.get('ws', None)
-
-    # Convert string to list of dict object
-    ws1 = json.loads(ws)
-
-    # Get object id, name, date
-    ws_id = ws1[0]['pk']
-    ws_name = ws1[0]['fields']['name']
-    ws_date = ws1[0]['fields']['date']
-    ws = Worksheet.objects.get(id=ws_id)
-
-    entries = []
-
-    # Format Worksheet toString into list of lists
-    
-    for element in ws.entry_set.all():
-        string = str(element)
-        result = list(string.split("-"))
-        entries.append(result)
-
     # Start from the first column, Write titles
     col = 0
+    row = 0
 
-    for element in categories:
-        worksheet.write(0, col, element)
+    for element in titles:
+        worksheet.write(row, col, element)
         col += 1
 
     # Start from the second row.
@@ -55,8 +50,8 @@ def excelreport(request):
     col = 0
 
     # Iterate over the data and write it out row by row.
-    for name, day, store, task, start, end in (entries):
-        worksheet.write(row, col,     name)
+    for day, store, task, start, end in (entries):
+        worksheet.write(row, col,     ws_name)
         worksheet.write(row, col + 1, day)
         worksheet.write(row, col + 2, store)
         worksheet.write(row, col + 3, task)
