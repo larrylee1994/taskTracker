@@ -11,7 +11,6 @@ class EntryResource(resources.ModelResource):
     name = Field(attribute='worksheet__user__first_name', column_name='NAME')
     store = Field(attribute='store', column_name='STORE')
     operation = Field(attribute='operation', column_name='OPERATION')
-    # start_time = Field(attribute='start_time', column_name='START TIME')
     date = Field(
         column_name='DAY',
         attribute='worksheet__date',
@@ -24,6 +23,11 @@ class EntryResource(resources.ModelResource):
         column_name='END TIME',
         attribute='end_time',
         widget=TimeWidget(format='%I:%M:%S %p'))
+    
+    # full_name = Field()
+
+    # def dehydrate_full_name(self, worksheet):
+    #     return '%s %s' % (worksheet.user.first_name, worksheet.user.last_name)
     class Meta:
         model = Entry
         skip_unchanged = True
@@ -51,9 +55,9 @@ class EntryAdmin(ImportExportActionModelAdmin):
     def get_date(self, obj):
         return obj.worksheet.date
 
-    get_name.admin_order_field = 'worksheet'
+    get_name.admin_order_field = 'worksheet__user__first_name'
     get_name.short_description = 'Name'
-    get_date.admin_order_field = 'worksheet'
+    get_date.admin_order_field = 'worksheet__id'
     get_date.short_description = 'Date'
 
 
@@ -71,6 +75,9 @@ class WorksheetResource(resources.ModelResource):
 
 
 class WorksheetAdmin(ImportExportActionModelAdmin):
+
+    # TODO add row sorting by First Last Name, and a row sorting by creation ws.id
+
     resource_class = WorksheetResource
     list_display = ('name', 'date')
 

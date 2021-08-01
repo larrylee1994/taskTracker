@@ -16,8 +16,6 @@ class Worksheet(models.Model):
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
 
-    # TODO: implement operation.value, and operation.desciption
-    
     operations = [
         {"name": 'REC',      "desc": "Receiving"},
         {"name": 'BACK',     "desc": "Back Stocking"},
@@ -33,12 +31,12 @@ class Worksheet(models.Model):
     ]
 
     stores = [
-        {"name": 'Orlando', "number": 116},
-        {"name": 'LBV', "number": 167},
+        {"name": 'Orlando',  "number": 116},
+        {"name": 'LBV',      "number": 167},
         {"name": 'Vineland', "number": 215},
         {"name": 'Footwear', "number": 254},
-        {"name": 'Youth', "number": 279},
-        {"name": 'Disney', "number": 517},
+        {"name": 'Youth',    "number": 279},
+        {"name": 'Disney',   "number": 517},
     ]
 
     class Meta:
@@ -69,13 +67,12 @@ class Entry(models.Model):
 
         day = self.worksheet.date.strftime('%A')
         start = self.start_time.strftime('%I:%M:%S %p')
-        name = self.worksheet.name
         if self.end_time == None:
             end = "None"
         else:
             end = self.end_time.strftime('%I:%M:%S %p')
 
-        return name + "-" + day + "-" + str(self.store) + "-" + self.operation + "-" + start + "-" + end
+        return day + "-" + str(self.store) + "-" + self.operation + "-" + start + "-" + end
 
     # TODO get absolute url work dynamically, currently only works on host machine
     def get_absolute_url(self):
