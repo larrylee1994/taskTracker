@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Worksheet
 from django.utils import timezone
 from django.http import HttpResponseRedirect
-from django.core import serializers
 
 
 
@@ -27,6 +26,8 @@ def dashboard(response):
     return render(response, 'dashboard.html', {"ws": ws})
 
 # TODO: abstract tracker function into its own view
+# TODO: global variables or object for variables
+
 def user_tracker(response, id):
 
     # TODO: properly catch this specific expeption
@@ -35,19 +36,20 @@ def user_tracker(response, id):
     except:
         return HttpResponseRedirect('/')
     
-    # Creates a callable session for export to excel view
-    serialized_obj = serializers.serialize('json', [ ws, ])
-    response.session['ws'] = serialized_obj
+    
     view_flag = False
 
     # Only continue if worksheet belongs to user
     if ws in response.user.worksheet.all():
         view_flag = True
     
+    # Or continue if user is superuser
     if response.user.is_superuser:
         view_flag = True
     
     if (view_flag):
+
+        response.session['ws'] = id
 
         last_entry = len(ws.entry_set.all())
         if response.method == "POST":
@@ -62,7 +64,7 @@ def user_tracker(response, id):
                 else:
                     # Update lastest end time to now
                     # DEMO
-                    entry = ws.entry_set.order_by('id')[last_entry - 1]
+                    entry = ws.entry_set.last()
                     if (entry.end_time == None):
                         entry.end_time = timezone.now()
                     entry.save()
@@ -77,12 +79,12 @@ def user_tracker(response, id):
             elif response.POST.get("delete"):
 
                 if (last_entry > 0):
-                    entry = ws.entry_set.order_by('id')[last_entry - 1]
+                    entry = ws.entry_set.last()
                     entry.delete()
 
             elif response.POST.get("complete"):
                 # Update lastest end time to now
-                entry = ws.entry_set.order_by('id')[last_entry - 1]
+                entry = ws.entry_set.last()
                 if (entry.end_time == None):
                     entry.end_time = timezone.now()
                     entry.save()
