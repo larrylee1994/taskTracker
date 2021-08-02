@@ -28,7 +28,8 @@ def tracker(response, id):
                 delete_last_entry(ws, entry_len)
 
             elif response.POST.get("complete"):
-                update_last_entry(response, ws, entry_len)
+                update_last_entry(ws, entry_len)
+                complete_worksheet(ws)
 
         # reload page with updated values
         return render(response, 'tracker/tracker.html', {"ws": ws})
@@ -44,8 +45,9 @@ def create_new_entry(response, ws):
     )
     entry.save()
 
-def update_last_entry(response, ws, entry_len):
+def update_last_entry(ws, entry_len):
     # Set lastest end time to now
+    # DEMO entry update behavior 
     if (entry_len > 0):
         entry = ws.entry_set.last()
         if (entry.end_time == None):
@@ -56,6 +58,11 @@ def delete_last_entry(ws, entry_len):
     if (entry_len > 0):
         entry = ws.entry_set.last()
         entry.delete()
+    pass
+
+def complete_worksheet(ws):
+    ws.complete = True
+    ws.save()
     pass
 
 def get_view_flag(response, ws):

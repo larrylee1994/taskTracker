@@ -16,6 +16,7 @@ class Worksheet(models.Model):
         User, on_delete=models.CASCADE, related_name="worksheet", null=True)
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
+    complete = models.BooleanField(db_column="Completed")
 
     stores = [
         {"name": 'Orlando',  "number": 116},
@@ -73,6 +74,7 @@ class Entry(models.Model):
 
     def get_absolute_url(self):
         return reverse("tracker", kwargs={"id": self.worksheet.pk})
+
 
 class Operation(models.Model):
 

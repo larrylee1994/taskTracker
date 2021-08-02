@@ -7,7 +7,7 @@
     {% if user.is_authenticated %}
         <div class="list-group">
             {% for ws in user.worksheet.all reversed %}
-                <a href="/tracker/{{ws.id}}" class="list-group-item list-group-item-action">
+                <a href="{{ws.get_absolute_url}}" class="list-group-item list-group-item-action">
                     {{ws.date}} - {{ws.name}} - {{ws.id}}
                 </a>
             {% endfor %}
