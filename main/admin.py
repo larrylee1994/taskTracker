@@ -91,4 +91,4 @@ class OperationAdmin(admin.ModelAdmin):
 admin.site.register(Worksheet, WorksheetAdmin)
 admin.site.register(Entry, EntryAdmin)
 admin.site.register(Operation, OperationAdmin)
-admin.site.site_header = 'My administration'
+admin.site.site_header = 'Family administration'
