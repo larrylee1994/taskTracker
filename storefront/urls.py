@@ -18,12 +18,14 @@ from django.urls import path, include
 from register import views as rv
 from export import views as ev
 from tracker import views as tv
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', rv.register, name="register"),
     path('export/', ev.excelreport, name="export"),
     path('tracker/<int:id>', tv.tracker, name="tracker"),
+    path('react/', TemplateView.as_view(template_name="index.html"), name="react"),
     path('', include('main.urls')),
     path('', include("django.contrib.auth.urls")),
 ]
