@@ -6,8 +6,30 @@ from django.contrib.sites.models import Site
 from datetime import datetime, timedelta
 from time import strftime
 from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import lazy
+from main.choices import TEST_CHOICES
 
 # Create your models here.
+
+class Operation(models.Model):
+
+    name = models.CharField(name="name", max_length=30)
+    description = models.CharField(name="description", max_length=30)
+
+    class Meta:
+        verbose_name = _("Operation")
+        verbose_name_plural = _("Operations")
+
+    def __str__(self):
+        return self.name
+
+# TODO doesn't save changes to entry edit form
+def operations_choice():
+        op = Operation.objects.all()
+        list = []
+        for item in op:
+            list.append([f"{item.name}", f"{item.name} - {item.description}"])
+        return list
 
 
 class Worksheet(models.Model):
@@ -16,7 +38,7 @@ class Worksheet(models.Model):
         User, on_delete=models.CASCADE, related_name="worksheet", null=True)
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
-    complete = models.BooleanField(db_column="Completed")
+    complete = models.BooleanField(db_column="Completed", default=False)
 
     stores = [
         {"name": 'Orlando',  "number": 116},
@@ -37,23 +59,23 @@ class Worksheet(models.Model):
     def get_absolute_url(self):
         return reverse("tracker", kwargs={"id": self.pk})
         # return "tracker/%i" % self.pk
-    
+
     def get_operations(self):
         op = Operation.objects.all()
         list = []
         for item in op:
             list.append({"name":item.name, "desc":item.description})
         return list
-
     # DEMO user defined operations
     operations = get_operations
 
 
 class Entry(models.Model):
 
+    # TODO validate start and end times. End time cannot be lower than start time.
     worksheet = models.ForeignKey(Worksheet, on_delete=models.CASCADE)
     start_time = models.TimeField(name="start_time", null=True, blank=True)
-    operation = models.CharField(name="operation", max_length=10)
+    operation = models.CharField(choices=operations_choice() ,name="operation", max_length=50)
     store = models.IntegerField(name="store", default=116)
     end_time = models.TimeField(name="end_time", null=True, blank=True)
 
@@ -76,14 +98,4 @@ class Entry(models.Model):
         return reverse("tracker", kwargs={"id": self.worksheet.pk})
 
 
-class Operation(models.Model):
 
-    name = models.CharField(name="name", max_length=30)
-    description = models.CharField(name="description", max_length=30)
-
-    class Meta:
-        verbose_name = _("Operation")
-        verbose_name_plural = _("Operations")
-
-    def __str__(self):
-        return self.name

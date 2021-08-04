@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load tz %}
 
 {% block title %}Tracker{% endblock %}
 {% block title2 %}Worksheet View{% endblock title2 %}
@@ -54,9 +53,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Start Time</th>
-                <th scope="col">Task</th>
+                <th scope="col">Operation</th>
                 <th scope="col">Store</th>
                 <th scope="col">End Time</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -67,6 +67,9 @@
                 <td colspan="1">{{entry.operation}}</td>
                 <td colspan="1">{{entry.store}}</td>
                 <td colspan="1">{{entry.end_time}}</td>
+                <td colspan="1"><a href="update/{{entry.id}}">
+                    <button type="button" class="btn btn-primary">Edit</button>
+                </a></td>
             </tr>
             {% endfor %}
         </tbody>

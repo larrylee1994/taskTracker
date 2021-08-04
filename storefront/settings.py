@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tempus_dominus',
     'crispy_forms',
     'crispy_bootstrap5',
     'main',
@@ -64,7 +65,9 @@ ROOT_URLCONF = 'storefront.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/build'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,6 +135,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/build/static'),
+]
 SITE_ID = 1
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
@@ -151,5 +157,4 @@ APPEND_SLASH = False
 
 # TODO: create page: logout
 LOGOUT_REDIRECT_URL = "/login/"
-
 DELIMITER = "-"

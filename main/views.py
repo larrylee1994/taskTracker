@@ -14,7 +14,7 @@ def home(response):
         worksheet.save()
         response.user.worksheet.add(worksheet)
 
-        return HttpResponseRedirect("tracker/%i" % worksheet.id)
+        return HttpResponseRedirect("tracker/%i/" % worksheet.id)
     else:
         pass
 

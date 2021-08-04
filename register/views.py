@@ -7,10 +7,8 @@ from .forms import RegisterForm
 
 def register(response):
     if response.method == "POST":
-        print(response)
         form = RegisterForm(response.POST)
         if form.is_valid():
-            print(form)
             form.save()
             # TODO: create page: successful register
             return redirect("/login/")
