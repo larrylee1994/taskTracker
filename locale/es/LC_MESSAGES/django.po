@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-12 18:26-0400\n"
+"POT-Creation-Date: 2021-08-13 11:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,24 @@ msgstr "Primer nombre"
 msgid "Last Name"
 msgstr "El Nombre de Familia"
 
+#: register/templates/register/register.html:3
+#: register/templates/register/register.html:4
+msgid "Create an Account"
+msgstr "Crea una cuenta"
+
+#: register/templates/register/register.html:8
+msgid "Already have an account? Log in"
+msgstr "¿Ya tienes una cuenta? Iniciar sesión"
+
+#: register/templates/register/register.html:8
+#: register/templates/registration/login.html:7
+msgid "here"
+msgstr "Aquí"
+
+#: register/templates/register/register.html:12
+msgid "Register"
+msgstr "Registrarse"
+
 #: register/templates/registration/login.html:2
 msgid "Login Page"
 msgstr "Página de inicio de sesión"
@@ -34,31 +52,27 @@ msgstr "Página de inicio de sesión"
 msgid "Dont have an account? Create one"
 msgstr "No tienes una cuenta? Crea uno"
 
-#: register/templates/registration/login.html:7
-msgid "here"
-msgstr "Aquí"
-
 #: register/templates/registration/login.html:10
 msgid "Login"
 msgstr "Acceso"
 
 #: storefront/settings.py:124
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: storefront/settings.py:125
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: tracker/templates/tracker/tracker.html:5
 msgid "Worksheet View"
 msgstr "Ver hoja de trabajo"
 
-#: tracker/templates/tracker/tracker.html:13
+#: tracker/templates/tracker/tracker.html:14
 msgid "Start new task"
 msgstr "Iniciar nueva tarea"
 
-#: tracker/templates/tracker/tracker.html:31
+#: tracker/templates/tracker/tracker.html:32
 msgid "Select Operation"
 msgstr "Seleccionar Operación"
 
@@ -66,55 +80,55 @@ msgstr "Seleccionar Operación"
 msgid "Start New"
 msgstr "Tiempo Inicial"
 
-#: tracker/templates/tracker/tracker.html:56
+#: tracker/templates/tracker/tracker.html:55
 msgid "Start Time"
 msgstr "Tiempo Inicial"
 
-#: tracker/templates/tracker/tracker.html:57
+#: tracker/templates/tracker/tracker.html:56
 msgid "Task"
 msgstr "Operacion"
 
-#: tracker/templates/tracker/tracker.html:58
+#: tracker/templates/tracker/tracker.html:57
 msgid "Store"
 msgstr "Tienda"
 
-#: tracker/templates/tracker/tracker.html:59
+#: tracker/templates/tracker/tracker.html:58
 msgid "End Time"
 msgstr "Tiempo de Parada"
 
-#: tracker/templates/tracker/tracker.html:72
+#: tracker/templates/tracker/tracker.html:70
 msgid "Edit"
 msgstr "Editar"
 
-#: tracker/templates/tracker/tracker.html:82
+#: tracker/templates/tracker/tracker.html:80
 msgid "Undo"
 msgstr "Deshacer"
 
-#: tracker/templates/tracker/tracker.html:90
+#: tracker/templates/tracker/tracker.html:88
 msgid "Confirm Undo"
 msgstr "Confirmar Deshacer"
 
-#: tracker/templates/tracker/tracker.html:96
+#: tracker/templates/tracker/tracker.html:94
 msgid ""
 "This will delete the most recently created entry. You cannot undo this "
 "action. Are you sure?"
 msgstr ""
-"Esto eliminará la entrada creada más recientemente. No puede deshacer esto"
-"acción. ¿Estás seguro?"
+"Esto eliminará la entrada creada más recientemente. No puede deshacer "
+"estoacción. ¿Estás seguro?"
 
-#: tracker/templates/tracker/tracker.html:99
+#: tracker/templates/tracker/tracker.html:97
 msgid "Close"
 msgstr "Cancelar"
 
-#: tracker/templates/tracker/tracker.html:102
+#: tracker/templates/tracker/tracker.html:100
 msgid "Delete"
 msgstr "Borrar"
 
-#: tracker/templates/tracker/tracker.html:113
+#: tracker/templates/tracker/tracker.html:111
 msgid "Complete"
 msgstr "Completa"
 
-#: tracker/templates/tracker/tracker.html:116
+#: tracker/templates/tracker/tracker.html:114
 msgid "Export to Excel"
 msgstr "Exportar a Excel"
 

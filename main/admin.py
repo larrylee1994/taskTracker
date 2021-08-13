@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Worksheet, Entry, Operation
+from main.models import Worksheet, Entry
 from import_export import resources
 from import_export.widgets import TimeWidget
 from import_export.fields import Field
@@ -24,7 +24,7 @@ class EntryResource(resources.ModelResource):
     end_time = Field(
         column_name='END TIME',
         attribute='end_time',
-        widget=TimeWidget(format='%I:%M:%S %p'))
+        widget=TimeWidget(format='%-I:%M:%S %p'))
 
     class Meta:
         model = Entry
@@ -61,6 +61,8 @@ class EntryAdmin(ImportExportActionModelAdmin):
     get_name.short_description = 'Name'
     get_date.admin_order_field = 'worksheet__id'
     get_date.short_description = 'Date'
+
+
 class WorksheetAdmin(admin.ModelAdmin):
 
     list_display = ('get_name', 'get_date')
@@ -81,12 +83,7 @@ class WorksheetAdmin(admin.ModelAdmin):
     get_date.admin_order_field = 'id'
     get_date.short_description = 'Date'
 
-class OperationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-
-
 
 admin.site.register(Worksheet, WorksheetAdmin)
 admin.site.register(Entry, EntryAdmin)
-admin.site.register(Operation, OperationAdmin)
 admin.site.site_header = 'Family administration'

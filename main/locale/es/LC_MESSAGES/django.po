@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-12 18:26-0400\n"
+"POT-Creation-Date: 2021-08-13 11:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,67 +82,75 @@ msgstr ""
 msgid "517 - Disney"
 msgstr ""
 
-#: main/models.py:20
-msgid "Operation"
-msgstr ""
-
-#: main/models.py:21
-msgid "Operations"
-msgstr ""
-
-#: main/models.py:57
+#: main/models.py:28
 msgid "Worksheet"
-msgstr ""
+msgstr "Hoja de cálculo"
 
-#: main/models.py:58 main/templates/base.html:75
+#: main/models.py:29 main/templates/base.html:79
 msgid "Worksheets"
 msgstr "Hojas de trabajo"
 
-#: main/models.py:87
+#: main/models.py:44
+msgid "Start Time"
+msgstr "Tiempo Inicial"
+
+#: main/models.py:45
+msgid "Operation"
+msgstr "Operacion"
+
+#: main/models.py:46
+msgid "Store"
+msgstr "Tienda"
+
+#: main/models.py:47
+msgid "End time"
+msgstr "Tiempo de Parada"
+
+#: main/models.py:50
 msgid "entry"
-msgstr ""
+msgstr "entrada"
 
-#: main/models.py:88
+#: main/models.py:51
 msgid "entries"
-msgstr ""
+msgstr "entradas"
 
-#: main/templates/base.html:67
+#: main/templates/base.html:71
 msgid "Home"
 msgstr "Casa"
 
-#: main/templates/base.html:70
+#: main/templates/base.html:76
 msgid "Dashboard"
 msgstr "Panel"
 
-#: main/templates/base.html:79
+#: main/templates/base.html:83
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: main/templates/base.html:86
+#: main/templates/base.html:90
 msgid "Admin"
 msgstr "Administración"
 
-#: main/templates/base.html:91
+#: main/templates/base.html:95
 msgid "Register"
 msgstr "Registrarse"
 
-#: main/templates/base.html:94
+#: main/templates/base.html:98
 msgid "Login"
 msgstr "Acceso"
 
-#: main/templates/base.html:112
+#: main/templates/base.html:116
 msgid "Cannot access this page"
 msgstr "No se puede acceder a esta página"
 
-#: main/templates/base.html:113
+#: main/templates/base.html:117
 msgid "Login to gain access"
 msgstr "Inicie sesión para obtener acceso"
 
-#: main/templates/base.html:115
+#: main/templates/base.html:119
 msgid "Go to Login"
 msgstr "Ir a Iniciar sesión"
 
-#: main/templates/base.html:142
+#: main/templates/base.html:145
 msgid "Go"
 msgstr "Ir"
 
@@ -152,7 +160,7 @@ msgstr "Pagina de inicio"
 
 #: main/templates/home.html:5
 msgid "Start new Worksheet"
-msgstr "Hojas de trabajo"
+msgstr "Iniciar nueva hoja de trabajo"
 
 #: main/templates/home.html:17
 msgid "Create New"

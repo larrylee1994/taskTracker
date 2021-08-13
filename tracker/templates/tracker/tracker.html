@@ -4,6 +4,7 @@
 {% block title %}Tracker{% endblock %}
 {% block title2 %}{% trans "Worksheet View" %}{% endblock title2 %}
 
+
 {% block content %}
 {% if user.is_authenticated %}
 <h3>{{ws.name}}</h3>
@@ -19,10 +20,10 @@
             <div class="btn-group-lg gap-3 me-1" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <!-- stores list -->
-                    {% for item in ws.stores %}
+                    {% for item_number, item_desc in ws.stores %}
                     <input type="radio" class="btn-check" name="store_list" id="btnradio{{forloop.counter}}"
-                        autocomplete="off" required value={{item.number}}>
-                    <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item.number}}</label>
+                        autocomplete="off" required value={{item_number}}>
+                    <label class="btn btn-outline-primary" for="btnradio{{forloop.counter}}">{{item_number}}</label>
                     {% endfor %}
                 </div>
             </div>
@@ -30,12 +31,11 @@
             <div class="input-group">
                 <div class="input-group-text" id="btnGroupAddon">{% trans "Select Operation" %}</div>
 
-                <select class="form-select form-control-lg" name="operation_list" aria-describedby="btnGroupAddon"
-                    required>
-                    <option disabled>Select Operation</option>
+                <select class="form-select form-control-lg" name="operation_list" id="mySelect" aria-describedby="btnGroupAddon" required>
                     <!-- operation list -->
-                    {% for item in ws.operations %}
-                    <option value={{item.name}}>{{item.name}} - {{item.desc}}</option>
+                    <option disabled>Select Operation</option>
+                    {% for item_name, item_desc in ws.operations %}
+                        <option value="{{ item_name }}">{{item_desc}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -52,7 +52,6 @@
     <table class="table table-striped table-hover table-bordered shadow p-3 mb-5 bg-body rounded">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">{% trans "Start Time" %}</th>
                 <th scope="col">{% trans "Task" %}</th>
                 <th scope="col">{% trans "Store" %}</th>
@@ -63,7 +62,6 @@
         <tbody>
             {% for entry in ws.entry_set.all %}
             <tr>
-                <th scope="row">{{forloop.counter}}</th>
                 <td colspan="1">{{entry.start_time}}</td>
                 <td colspan="1">{{entry.operation}}</td>
                 <td colspan="1">{{entry.store}}</td>

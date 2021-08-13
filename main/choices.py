@@ -1,7 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-
-TEST_CHOICES = (
+OPERATION_CHOICES = (
     ("Receiving",      _("Receiving")),
     ("Processing",     _("Processing")),
     ("Back Stocking",  _("Back Stocking")),

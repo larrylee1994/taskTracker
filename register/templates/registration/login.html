@@ -4,10 +4,10 @@
 <form action="#" method="POST" , class="form-group">
   {% csrf_token %} {{ form | crispy }}
   <p>
-    {% trans "Dont have an account? Create one" %} <a href="/register"><h3>{% trans "here" %}</h3></a>
+    {% trans "Dont have an account? Create one" %} <a href="/register/">{% trans "here" %}</a>
   </p>
   <button type="submit" class="btn btn-primary">
-    <h3>{% trans "Login" %}</h3>
+    {% trans "Login" %}
   </button>
 </form>
 {% endblock %} {% block login %} {% endblock login %}
