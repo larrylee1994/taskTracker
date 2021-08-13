@@ -1,13 +1,24 @@
+from django.utils.translation import ugettext_lazy as _
+
+
 TEST_CHOICES = (
-    (1, ("Orden Creada")),
-    (2, ("En Tienda Asociada")),
-    (3, ("Recibida en Cuyotek")),
-    (4, ("En Mesa de Trabajo")),
-    (5, ("Trabajo completado")),
-    (6, ("Sin Solución")),
-    (7, ("Lista para retirar en Cuyotek")),
-    (8, ("Lista para retirar en Tienda Asociada")),
-    (9, ("Es necesario contactar al cliente")),
-    (10, ("En espera de Repuestos")),
-    (20, ("ENTREGADA")),
+    ("Receiving",      _("Receiving")),
+    ("Processing",     _("Processing")),
+    ("Back Stocking",  _("Back Stocking")),
+    ("Picking",        _("Report/Scan Picking")),
+    ("Scanning",       _("Scanning Units")),
+    ("LOAD",           _("Loading Truck")),
+    ("DEL",            _("Delivering")),
+    ("Break",          _("Break")),
+    ("Cleaning",       _("Cleaning")),
+    ("Lunch",          _("Lunch")),
+)
+
+STORE_CHOICES = (
+    (116, _("116 - Orlando")),
+    (167, _("167 - LBV")),
+    (215, _("215 - Vineland")),
+    (254, _("254 - Footwear")),
+    (279, _("279 - Youth")),
+    (517, _("517 - Disney")),
 )

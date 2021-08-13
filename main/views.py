@@ -30,3 +30,11 @@ def dashboard(response):
 
 def worksheets(response):
     return render(response, "worksheets.html", {})
+
+def set_language(response):
+
+    context = {
+        'redirect_to': '',
+    }
+    
+    return

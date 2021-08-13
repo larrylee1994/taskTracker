@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-12 18:26-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: register/forms.py:8
+msgid "First Name"
+msgstr "Primer nombre"
+
+#: register/forms.py:9
+msgid "Last Name"
+msgstr "El Nombre de Familia"
+
+#: register/templates/registration/login.html:2
+msgid "Login Page"
+msgstr "Página de inicio de sesión"
+
+#: register/templates/registration/login.html:7
+msgid "Dont have an account? Create one"
+msgstr "No tienes una cuenta? Crea uno"
+
+#: register/templates/registration/login.html:7
+msgid "here"
+msgstr "Aquí"
+
+#: register/templates/registration/login.html:10
+msgid "Login"
+msgstr "Acceso"
+
+#: storefront/settings.py:124
+msgid "English"
+msgstr ""
+
+#: storefront/settings.py:125
+msgid "Spanish"
+msgstr ""
+
+#: tracker/templates/tracker/tracker.html:5
+msgid "Worksheet View"
+msgstr "Ver hoja de trabajo"
+
+#: tracker/templates/tracker/tracker.html:13
+msgid "Start new task"
+msgstr "Iniciar nueva tarea"
+
+#: tracker/templates/tracker/tracker.html:31
+msgid "Select Operation"
+msgstr "Seleccionar Operación"
+
+#: tracker/templates/tracker/tracker.html:45
+msgid "Start New"
+msgstr "Tiempo Inicial"
+
+#: tracker/templates/tracker/tracker.html:56
+msgid "Start Time"
+msgstr "Tiempo Inicial"
+
+#: tracker/templates/tracker/tracker.html:57
+msgid "Task"
+msgstr "Operacion"
+
+#: tracker/templates/tracker/tracker.html:58
+msgid "Store"
+msgstr "Tienda"
+
+#: tracker/templates/tracker/tracker.html:59
+msgid "End Time"
+msgstr "Tiempo de Parada"
+
+#: tracker/templates/tracker/tracker.html:72
+msgid "Edit"
+msgstr "Editar"
+
+#: tracker/templates/tracker/tracker.html:82
+msgid "Undo"
+msgstr "Deshacer"
+
+#: tracker/templates/tracker/tracker.html:90
+msgid "Confirm Undo"
+msgstr "Confirmar Deshacer"
+
+#: tracker/templates/tracker/tracker.html:96
+msgid ""
+"This will delete the most recently created entry. You cannot undo this "
+"action. Are you sure?"
+msgstr ""
+"Esto eliminará la entrada creada más recientemente. No puede deshacer esto"
+"acción. ¿Estás seguro?"
+
+#: tracker/templates/tracker/tracker.html:99
+msgid "Close"
+msgstr "Cancelar"
+
+#: tracker/templates/tracker/tracker.html:102
+msgid "Delete"
+msgstr "Borrar"
+
+#: tracker/templates/tracker/tracker.html:113
+msgid "Complete"
+msgstr "Completa"
+
+#: tracker/templates/tracker/tracker.html:116
+msgid "Export to Excel"
+msgstr "Exportar a Excel"
+
+#: tracker/templates/tracker/update.html:4
+#: tracker/templates/tracker/update.html:15
+msgid "Update"
+msgstr "Actualizar"
+
+#: tracker/templates/tracker/update.html:5
+msgid "Update View"
+msgstr "Vista de actualización"
+
+#~ msgid "start_time"
+#~ msgstr "Tiempo Inicial"

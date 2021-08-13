@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Tracker{% endblock %}
-{% block title2 %}Worksheet View{% endblock title2 %}
+{% block title2 %}{% trans "Worksheet View" %}{% endblock title2 %}
 
 {% block content %}
 {% if user.is_authenticated %}
@@ -9,7 +10,7 @@
 <h2>{{ws.date}}</h2>
 
 
-<h3>Start new task</h3>
+<h3>{% trans "Start new task" %}</h3>
 <div class="d-grid gap-3">
     <form method="post" action="#" , class="form-group">
         {% csrf_token %}
@@ -27,7 +28,7 @@
             </div>
 
             <div class="input-group">
-                <div class="input-group-text" id="btnGroupAddon">Select Operation</div>
+                <div class="input-group-text" id="btnGroupAddon">{% trans "Select Operation" %}</div>
 
                 <select class="form-select form-control-lg" name="operation_list" aria-describedby="btnGroupAddon"
                     required>
@@ -41,7 +42,7 @@
 
             <!-- Start New Button -->
             <div class="d-grid gap-3">
-                <button class="btn btn-success" type="submit" name="start_new" , value="start_new">Start New</button>
+                <button class="btn btn-success" type="submit" name="start_new" , value="start_new">{% trans "Start New" %}</button>
             </div>
         </div>
     </form>
@@ -52,10 +53,10 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">Operation</th>
-                <th scope="col">Store</th>
-                <th scope="col">End Time</th>
+                <th scope="col">{% trans "Start Time" %}</th>
+                <th scope="col">{% trans "Task" %}</th>
+                <th scope="col">{% trans "Store" %}</th>
+                <th scope="col">{% trans "End Time" %}</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -68,7 +69,7 @@
                 <td colspan="1">{{entry.store}}</td>
                 <td colspan="1">{{entry.end_time}}</td>
                 <td colspan="1"><a href="update/{{entry.id}}">
-                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button type="button" class="btn btn-primary">{% trans "Edit" %}</button>
                 </a></td>
             </tr>
             {% endfor %}
@@ -78,7 +79,7 @@
     <!-- Undo button -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#undo_button">
-        Undo
+        {% trans "Undo" %}
     </button>
 
     <!-- Modal -->
@@ -86,19 +87,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="undoLabel">Confirm Undo</h5>
+                    <h5 class="modal-title" id="undoLabel">{% trans "Confirm Undo" %}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
         
                 <div class="modal-body">
-                    This will delete the most recently created entry. You cannot undo this action. Are you sure? {{ws.entry_set.last}}
+                    {% trans "This will delete the most recently created entry. You cannot undo this action. Are you sure?" %} {{ws.entry_set.last}}
                 </div>  
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
                     <form method="post" action="#" , class="form-group">
                         {% csrf_token %}
-                        <button class="btn btn-danger" type="submit" name="delete" value="delete">Delete</button>
+                        <button class="btn btn-danger" type="submit" name="delete" value="delete">{% trans "Delete" %}</button>
                     </form>
                 </div>
             </div>
@@ -109,10 +110,10 @@
     <form method="post" action="#" , class="form-group">
         {% csrf_token %}
         <div class="d-grid gap-3">
-            <button class="btn btn-info" type="submit" name="complete" , value="complete">Complete</button>
+            <button class="btn btn-info" type="submit" name="complete" , value="complete">{% trans "Complete" %}</button>
         </div>
     </form>
-    <a href="/export">Export to Excel !</a>
+    <a href="/export">{% trans "Export to Excel" %}</a>
 </div>
 
 

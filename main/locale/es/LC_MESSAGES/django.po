@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <larrylee1994@gmail.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-12 18:26-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main/choices.py:5
+msgid "Receiving"
+msgstr "Recibir"
+
+#: main/choices.py:6
+msgid "Processing"
+msgstr "Procesar"
+
+#: main/choices.py:7
+msgid "Back Stocking"
+msgstr "Almacenar"
+
+#: main/choices.py:8
+msgid "Report/Scan Picking"
+msgstr "Seleccionar con Replen/Escáner"
+
+#: main/choices.py:9
+msgid "Scanning Units"
+msgstr "Escanear"
+
+#: main/choices.py:10
+msgid "Loading Truck"
+msgstr "Cargar el camión"
+
+#: main/choices.py:11
+msgid "Delivering"
+msgstr "Entragar"
+
+#: main/choices.py:12
+msgid "Break"
+msgstr "Break"
+
+#: main/choices.py:13
+msgid "Cleaning"
+msgstr "Limpieza"
+
+#: main/choices.py:14
+msgid "Lunch"
+msgstr "Lunch"
+
+#: main/choices.py:18
+msgid "116 - Orlando"
+msgstr ""
+
+#: main/choices.py:19
+msgid "167 - LBV"
+msgstr ""
+
+#: main/choices.py:20
+msgid "215 - Vineland"
+msgstr ""
+
+#: main/choices.py:21
+msgid "254 - Footwear"
+msgstr ""
+
+#: main/choices.py:22
+msgid "279 - Youth"
+msgstr ""
+
+#: main/choices.py:23
+msgid "517 - Disney"
+msgstr ""
+
+#: main/models.py:20
+msgid "Operation"
+msgstr ""
+
+#: main/models.py:21
+msgid "Operations"
+msgstr ""
+
+#: main/models.py:57
+msgid "Worksheet"
+msgstr ""
+
+#: main/models.py:58 main/templates/base.html:75
+msgid "Worksheets"
+msgstr "Hojas de trabajo"
+
+#: main/models.py:87
+msgid "entry"
+msgstr ""
+
+#: main/models.py:88
+msgid "entries"
+msgstr ""
+
+#: main/templates/base.html:67
+msgid "Home"
+msgstr "Casa"
+
+#: main/templates/base.html:70
+msgid "Dashboard"
+msgstr "Panel"
+
+#: main/templates/base.html:79
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: main/templates/base.html:86
+msgid "Admin"
+msgstr "Administración"
+
+#: main/templates/base.html:91
+msgid "Register"
+msgstr "Registrarse"
+
+#: main/templates/base.html:94
+msgid "Login"
+msgstr "Acceso"
+
+#: main/templates/base.html:112
+msgid "Cannot access this page"
+msgstr "No se puede acceder a esta página"
+
+#: main/templates/base.html:113
+msgid "Login to gain access"
+msgstr "Inicie sesión para obtener acceso"
+
+#: main/templates/base.html:115
+msgid "Go to Login"
+msgstr "Ir a Iniciar sesión"
+
+#: main/templates/base.html:142
+msgid "Go"
+msgstr "Ir"
+
+#: main/templates/home.html:4
+msgid "Home Page"
+msgstr "Pagina de inicio"
+
+#: main/templates/home.html:5
+msgid "Start new Worksheet"
+msgstr "Hojas de trabajo"
+
+#: main/templates/home.html:17
+msgid "Create New"
+msgstr "Crear nueva"

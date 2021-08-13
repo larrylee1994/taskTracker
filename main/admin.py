@@ -5,8 +5,6 @@ from import_export.widgets import TimeWidget
 from import_export.fields import Field
 from import_export.admin import ImportExportActionModelAdmin
 from django.contrib.admin import DateFieldListFilter, ListFilter
-from django.contrib.admin import AdminSite
-from django.utils.translation import ugettext_lazy
 
 
 class EntryResource(resources.ModelResource):

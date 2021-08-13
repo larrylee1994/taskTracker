@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from time import strftime
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import lazy
-from main.choices import TEST_CHOICES
+from main.choices import TEST_CHOICES, STORE_CHOICES
 
 # Create your models here.
 
@@ -23,19 +23,23 @@ class Operation(models.Model):
     def __str__(self):
         return self.name
 
-# TODO doesn't save changes to entry edit form
-def operations_choice():
-        op = Operation.objects.all()
-        list = []
-        for item in op:
-            list.append([f"{item.name}", f"{item.name} - {item.description}"])
-        return list
+# TODO doesn't save changes to entry edit form, change this to form choice
+# def operations_choice():
+#         op = Operation.objects.all()
+#         list = []
+#         for item in op:
+#             list.append([f"{item.name}", f"{item.name} - {item.description}"])
+#         return list
 
 
 class Worksheet(models.Model):
 
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="worksheet", null=True)
+        User, 
+        on_delete=models.CASCADE, 
+        related_name="worksheet", 
+        null=True
+    )
     name = models.CharField(max_length=20)
     date = models.DateField(name="date", auto_now_add=True)
     complete = models.BooleanField(db_column="Completed", default=False)
@@ -66,7 +70,7 @@ class Worksheet(models.Model):
         for item in op:
             list.append({"name":item.name, "desc":item.description})
         return list
-    # DEMO user defined operations
+        
     operations = get_operations
 
 
@@ -75,8 +79,8 @@ class Entry(models.Model):
     # TODO validate start and end times. End time cannot be lower than start time.
     worksheet = models.ForeignKey(Worksheet, on_delete=models.CASCADE)
     start_time = models.TimeField(name="start_time", null=True, blank=True)
-    operation = models.CharField(choices=operations_choice() ,name="operation", max_length=50)
-    store = models.IntegerField(name="store", default=116)
+    operation = models.CharField(choices=TEST_CHOICES, name="operation", max_length=50)
+    store = models.IntegerField(choices=STORE_CHOICES, name="store", default=116)
     end_time = models.TimeField(name="end_time", null=True, blank=True)
 
     class Meta:

@@ -1,18 +1,13 @@
-{% extends 'base.html' %}
-
-{% block title  %}Login Page{% endblock  %}
-{% block title2  %}Login Page{% endblock  %}
-
-{% load crispy_forms_tags %}
-
-{% block content  %}
-    <form action="#" method="POST", class="form-group">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <p>Dont have an account? Create one <a href="/register">here</a></p>
-        <button type="submit" class="btn btn-primary">login</button>
-    </form>
-{% endblock  %}
-
-{% block login %}
-{% endblock login %}
+{% extends 'base.html' %} {% load i18n %} {% block title %}
+{% trans "Login Page" %} {% endblock %} {% block title2 %}{% trans "Login Page" %}{% endblock %} 
+{% load crispy_forms_tags %} {% block content %}
+<form action="#" method="POST" , class="form-group">
+  {% csrf_token %} {{ form | crispy }}
+  <p>
+    {% trans "Dont have an account? Create one" %} <a href="/register"><h3>{% trans "here" %}</h3></a>
+  </p>
+  <button type="submit" class="btn btn-primary">
+    <h3>{% trans "Login" %}</h3>
+  </button>
+</form>
+{% endblock %} {% block login %} {% endblock login %}

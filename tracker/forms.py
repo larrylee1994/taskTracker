@@ -1,5 +1,6 @@
 from django import forms
 from main.models import Entry
+from django.utils.translation import ugettext_lazy as _
 
 
 class UpdateEntry(forms.ModelForm):
