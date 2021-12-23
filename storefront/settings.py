@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tempus_dominus',
     'crispy_forms',
     'crispy_bootstrap5',
     'main',
@@ -129,9 +128,11 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'main/locale'),
 )
 
+
+# git token "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"
+# git remote set-url origin https://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@github.com/larrylee1994/taskTracker/
+# git pull https://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@github.com/larrylee1994/taskTracker.git/
 TIME_ZONE = 'America/New_York'
-
-
 DATETIME_FORMAT = 'g:i:s a'
 TIME_FORMAT = 'g:i:s a'
 
