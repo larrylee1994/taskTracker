@@ -129,9 +129,9 @@ LOCALE_PATHS = (
 )
 
 
-# git token "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"
-# git remote set-url origin https://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@github.com/larrylee1994/taskTracker/
-# git pull https://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@github.com/larrylee1994/taskTracker.git/
+# git token "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"
+# git remote set-url origin https://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@github.com/larrylee1994/taskTracker/
+# git pull https://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@github.com/larrylee1994/taskTracker.git/
 TIME_ZONE = 'America/New_York'
 DATETIME_FORMAT = 'g:i:s a'
 TIME_FORMAT = 'g:i:s a'
